@@ -1,0 +1,20 @@
+{
+  "name": "freeflix",
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "inquirer": "^12.4.2",
+    "peerflix": "^0.39.0",
+    "torrent-browse": "^1.0.2"
+  },
+  "scripts": {
+    "start": "bun run index.ts",
+    "dev": "bun run index.ts"
+  }
+}
