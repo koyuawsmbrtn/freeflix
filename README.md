@@ -14,5 +14,5 @@ bun run index.ts
 
 ## Dependencies
 
-* gnome-terminal
+* gnome-terminal or any other supported Terminal
 * peerflix
