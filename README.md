@@ -1,6 +1,6 @@
 # freeflix
 
-**Warning:** Be very catious when using this script. It is illegal to download copyrighted material without permission. Always use a VPN when downloading torrents.
+**Warning:** Be very catious when using this script. It is illegal to download copyrighted material without permission. Always use a VPN when downloading torrents. You have been warned.
 
 ## How does this work?
 
