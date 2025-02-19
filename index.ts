@@ -1,3 +1,46 @@
+/**
+ * FreeFlix - A command-line torrent streaming application
+ * 
+ * This program allows users to search and stream movies/TV shows from torrent sources
+ * directly to their media player of choice (MPV or VLC).
+ * 
+ * @copyright Copyright (C) 2024
+ * @license GNU General Public License v3.0
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * 
+ * Features:
+ * - Integrated Mullvad VPN support
+ * - Cross-platform support (Windows, macOS, Linux)
+ * - Multiple media player support (MPV, VLC)
+ * - Automatic terminal detection
+ * - Peer filtering (minimum 2 peers required)
+ * 
+ * Dependencies:
+ * - readline: For command line interface
+ * - torrent-browse: For searching torrents
+ * - inquirer: For interactive selection
+ * - bun: For process execution
+ * - peerflix: For torrent streaming (external dependency)
+ * - Mullvad VPN (optional)
+ * 
+ * Command line options:
+ * --no-mullvad: Skip Mullvad VPN connection check
+ * 
+ * @requires node:readline
+ * @requires process
+ * @requires torrent-browse
+ * @requires inquirer
+ * @requires bun
+ */
+
 import * as readline from "node:readline";
 import { stdin as input, stdout as output } from "process";
 import { search, defaultProviders } from "torrent-browse";
@@ -5,7 +48,16 @@ import inquirer from "inquirer";
 import { $ } from "bun";
 
 const rl = readline.createInterface({ input, output });
-await $`rm -rf /tmp/torrent-stream/`
+await $`rm -rf /tmp/torrent-stream/`;
+
+if (!process.argv.includes("--no-mullvad")) {
+    try {
+        await $`mullvad connect && sleep 1`.quiet();
+        console.log("Mullvad enabled!");
+    } catch (error) {
+        console.error("Mullvad not found, skipping...");
+    }
+}
 
 rl.question("Search movies or episodes: ", (searchQuery: string) => {
     search(defaultProviders, searchQuery)
