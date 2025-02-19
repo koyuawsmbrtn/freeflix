@@ -11,3 +11,8 @@ To run:
 ```bash
 bun run index.ts
 ```
+
+## Dependencies
+
+* gnome-terminal
+* peerflix
