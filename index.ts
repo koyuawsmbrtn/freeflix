@@ -4,7 +4,7 @@
  * This program allows users to search and stream movies/TV shows from torrent sources
  * directly to their media player of choice (MPV or VLC).
  * 
- * @copyright Copyright (C) 2024
+ * @copyright Copyright (C) 2025
  * @license GNU General Public License v3.0
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
