@@ -1,5 +1,7 @@
 # freeflix
 
+**Warning:** Be very catious when using this script. It is illegal to download copyrighted material without permission. Always use a VPN when downloading torrents.
+
 ## How does this work?
 
 This is a TypeScript script. It scrapes 1337x and other sites and gets the magnet link.
