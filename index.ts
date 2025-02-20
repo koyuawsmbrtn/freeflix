@@ -94,11 +94,31 @@ rl.question("Search movies or episodes: ", (searchQuery: string) => {
                     ? ['Terminal.app', 'iTerm.app']
                     : ['kgx', 'gnome-terminal', 'xterm', 'konsole', 'terminal'];
 
-                let player = players.find(async p => (await $`which ${p}`.quiet()).exitCode === 0) || 'mpv';
+                let player = 'mpv';
+                for (const p of players) {
+                    try {
+                        if ((await $`which ${p}`.quiet()).exitCode === 0) {
+                            player = p;
+                            break;
+                        }
+                    } catch {
+                        continue;
+                    }
+                }
 
-                let terminal = terminals.find(async t => (await $`which ${t}`.quiet()).exitCode === 0) || 
-                    (process.platform === 'win32' ? 'cmd.exe' : 
-                     process.platform === 'darwin' ? 'Terminal.app' : 'xterm');
+                let terminal = 'xterm';
+                for (const t of terminals) {
+                    try {
+                        if ((await $`which ${t}`.quiet()).exitCode === 0) {
+                            terminal = t;
+                            break;
+                        }
+                    } catch {
+                        continue;
+                    }
+                }
+                terminal = process.platform === 'win32' ? 'cmd.exe' : 
+                          process.platform === 'darwin' ? 'Terminal.app' : terminal;
                 
                 if (process.platform === 'win32') {
                     await $`${terminal} /c "peerflix ${magnetMatch} --${player}"`;
