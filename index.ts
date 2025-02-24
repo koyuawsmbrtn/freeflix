@@ -48,7 +48,6 @@ import inquirer from "inquirer";
 import { $ } from "bun";
 
 const rl = readline.createInterface({ input, output });
-await $`rm -rf /tmp/torrent-stream/`;
 
 if (!process.argv.includes("--no-mullvad")) {
     try {
